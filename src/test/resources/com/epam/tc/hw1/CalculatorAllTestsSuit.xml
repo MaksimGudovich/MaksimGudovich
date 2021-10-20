@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Calculator All Tests Suit">
+
+  <test name="Calculator All Tests">
+    <packages>
+      <package name="com.epam.tc.hw1"/>
+    </packages>
+  </test>
+
+</suite>
