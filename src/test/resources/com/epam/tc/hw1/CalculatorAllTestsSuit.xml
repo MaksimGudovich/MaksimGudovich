@@ -3,7 +3,7 @@
 
   <test name="Calculator All Tests">
     <packages>
-      <package name="com.epam.tc.hw1"/>
+      <package name="com.epam.tc.hw1.tests"/>
     </packages>
   </test>
 
