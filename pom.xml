@@ -40,6 +40,19 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -82,7 +95,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc/hw1/${suite.xml.name}</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc${suite.xml.name}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -96,24 +109,30 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.name>CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-multiply-divide-test-suit</id>
             <properties>
-                <suite.xml.name>CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-all-test-suit</id>
             <properties>
-                <suite.xml.name>CalculatorAllTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorAllTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
+        <profile>
+            <id>homework2-all-tests-suit</id>
+            <properties>
+                <suite.xml.name>/hw2/JDIAllTestsSuit.xml</suite.xml.name>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
