@@ -8,17 +8,13 @@ import org.testng.annotations.Test;
 
 public class HomePageTest extends BaseTest {
 
-    protected boolean isHomePage;
-
     @Test
     public void jdiHomePageTest() {
 
         // 1. Open test site by URL
-        openHomePage();
 
         //2. Assert Browser title
-        isHomePage = isThisHomePage();
-        softAssert.assertTrue(isHomePage);
+        softAssert.assertTrue(isThisHomePage());
 
         // 3. Perform login
         loginUser();
@@ -30,45 +26,44 @@ public class HomePageTest extends BaseTest {
         // 5.  Assert that there are 4 items on the header section are displayed, and they have proper texts
         List<WebElement> headerElements = getElementList(By
             .cssSelector("[class^='uui-navigation nav navbar'] > li > a"));
-        boolean isAllHeaderItemsDisplayed = headerElements.size() == 4;
-        softAssert.assertTrue(isAllHeaderItemsDisplayed);
+
+        softAssert.assertEquals(headerElements.size(), 4);
 
         List<String> headerItemsNameList = getTextList(headerElements);
         softAssert.assertEquals(testData.headerItemNameList, headerItemsNameList);
 
         // 6. Assert that there are 4 images on the Index Page, and they are displayed
-        boolean isImagesDisplayed = getElementList(By.className("icons-benefit")).size() == 4;
-        softAssert.assertTrue(isImagesDisplayed);
+        List<WebElement> imageElementList = getElementList(By.className("icons-benefit"));
+        softAssert.assertEquals(imageElementList.size(), 4);
 
         // 7. Assert that there are 4 texts on the Index Page under icons, and they have proper text
         List<WebElement> imageTextList = getElementList(By.className("benefit-txt"));
-        boolean isImagesTextDisplayed = imageTextList.size() == 4;
-        softAssert.assertTrue(isImagesTextDisplayed);
+
+        softAssert.assertEquals(imageTextList.size(), 4);
 
         List<String> imagesElementsTextList = getTextList(imageTextList);
         softAssert.assertEquals(testData.imageTextList, imagesElementsTextList);
 
         // 8. Assert that there is the iframe with “Frame Button” exist
-        boolean hasIframe = isElementExist(By.id("frame"));
-        softAssert.assertTrue(hasIframe);
+        List<WebElement> iframeWithButtonList = getElementList(By.id("frame"));
+        softAssert.assertEquals(iframeWithButtonList.size(), 1);
 
         // 9. Switch to the iframe and check that there is “Frame Button” in the iframe
         webDriver.switchTo().frame("frame");
 
-        boolean hasIframeButton = isElementExist(By.id("frame-button"));
-        softAssert.assertTrue(hasIframeButton);
+        List<WebElement> iframeButtonList = getElementList(By.id("frame-button"));
+        softAssert.assertEquals(iframeButtonList.size(), 1);
 
         // 10. Switch to original window back
         webDriver.switchTo().parentFrame();
-        isHomePage = isThisHomePage();
-        softAssert.assertTrue(isHomePage);
+        softAssert.assertTrue(isThisHomePage());
 
         // 11. Assert that there are 5 items in the Left Section are displayed, and they have proper text
         List<WebElement> leftMenuElementList = getElementList(By
             .cssSelector("[class='sidebar-menu left'] > li > a >  span:first-child"));
 
-        boolean isLeftMenuElementDisplayed = leftMenuElementList.size() == 5;
-        softAssert.assertTrue(isLeftMenuElementDisplayed);
+
+        softAssert.assertEquals(leftMenuElementList.size(), 5);
 
         List<String> leftMenuElements = getTextList(leftMenuElementList);
         softAssert.assertEquals(testData.leftMenuElementList, leftMenuElements);

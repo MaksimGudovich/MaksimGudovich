@@ -1,6 +1,5 @@
 package com.epam.tc.hw2;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfAllElementsLocatedBy;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -38,6 +37,7 @@ public class BaseTest {
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
         softAssert = new SoftAssert();
         testData = new JdiTestData();
+        openHomePage();
     }
 
     @AfterMethod
@@ -62,10 +62,6 @@ public class BaseTest {
 
     protected WebElement isElementVisible(By by) {
         return wait.until(visibilityOfElementLocated(by));
-    }
-
-    protected boolean isElementExist(By by) {
-        return wait.until(presenceOfAllElementsLocatedBy(by)).size() > 0;
     }
 
     protected List<WebElement> getElementList(By by) {

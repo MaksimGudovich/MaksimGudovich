@@ -13,7 +13,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 2. Assert Browser title
     @Test
     public void openIndexPageTest() {
-        openHomePage();
         boolean isHomePage = isThisHomePage();
         assertThat(isHomePage).isTrue();
     }
@@ -22,7 +21,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 4. Assert User name in the right-top side of screen that user is loggined
     @Test
     public void userLoginTest() {
-        openHomePage();
         loginUser();
         WebElement actualUserName = isElementVisible(By.id("user-name"));
         assertThat(actualUserName.getText()).isEqualTo("ROMAN IOVLEV");
@@ -31,7 +29,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 5. Open through the header menu Service -> Different Elements Page
     @Test
     public void openDifferentElementPageTest() {
-        openHomePage();
         loginUser();
         openDifferentPage();
         assertThat(webDriver.getTitle()).isEqualTo("Different Elements");
@@ -42,7 +39,6 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWaterCheckboxTest() {
-        openHomePage();
         loginUser();
         openDifferentPage();
         WebElement waterCheckbox = isElementVisible(By.cssSelector(".label-checkbox:nth-child(1)"));
@@ -56,7 +52,6 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWindCheckboxTest() {
-        openHomePage();
         loginUser();
         openDifferentPage();
         WebElement windCheckbox = isElementVisible(By.cssSelector(".label-checkbox:nth-child(3)"));
@@ -69,7 +64,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 9. Assert that: for radio button there is a log row and value is corresponded to the status of radio button
     @Test
     public void selectSelenRadioTest() {
-        openHomePage();
         loginUser();
         openDifferentPage();
         WebElement selenRadioButton = webDriver.findElement(By.cssSelector(".label-radio:nth-child(4)"));
@@ -82,7 +76,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 9. Assert that: for dropdown there is a log row and value is corresponded to the selected value
     @Test
     public void selectYellowDropdownTest() {
-        openHomePage();
         loginUser();
         openDifferentPage();
         WebElement yellowDropdownButton = webDriver.findElement(By.xpath("//option[text()='Yellow']"));
