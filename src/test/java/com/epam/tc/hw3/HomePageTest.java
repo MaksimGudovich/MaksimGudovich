@@ -1,8 +1,15 @@
 package com.epam.tc.hw3;
 
-import com.epam.tc.hw3.page.HomePage;
-import java.util.Arrays;
+import static com.epam.tc.hw3.JdiTestData.getExpectedHeaderItemNameList;
+import static com.epam.tc.hw3.JdiTestData.getExpectedHomePageTitle;
+import static com.epam.tc.hw3.JdiTestData.getExpectedImageTextList;
+import static com.epam.tc.hw3.JdiTestData.getExpectedLeftMenuElementList;
+import static com.epam.tc.hw3.JdiTestData.getTestJdiURL;
+import static com.epam.tc.hw3.JdiTestData.getTestUserName;
+import static com.epam.tc.hw3.JdiTestData.getTestUserPassword;
+
 import java.util.List;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -14,83 +21,61 @@ public class HomePageTest extends BaseTest {
 
         // 1. Open test site by URL
         //2. Assert Browser title
-        String title = new HomePage(webDriver)
-            .open()
-            .getTitle();
+        String title = homePage.open(getTestJdiURL()).getTitle();
 
-        softAssert.assertEquals(title, "Home Page");
+        softAssert.assertEquals(title, getExpectedHomePageTitle());
 
         // 3. Perform login
         // 4. Assert Username is loggined
-        String actualUserName = new HomePage(webDriver)
-            .loginUser(userName, userPassword)
-            .getUserName();
+        String actualUserName = homePage.loginUser(getTestUserName(), getTestUserPassword()).getUserName();
 
         softAssert.assertEquals(actualUserName, "ROMAN IOVLEV");
 
         // 5.  Assert that there are 4 items on the header section are displayed, and they have proper texts
-        boolean isHeaderElementsDisplayed = new HomePage(webDriver)
-            .isHeaderElementsDisplayed();
+        List<WebElement> headerElements = homePage.getVisibleHeaderElements();
 
-        softAssert.assertTrue(isHeaderElementsDisplayed);
+        softAssert.assertEquals(headerElements.size(), 4);
 
-        List<String> headerMenuElementNames = new HomePage(webDriver)
-            .getHeaderMenuElementNameList();
+        List<String> actualHeaderMenuElementNames = homePage.getHeaderMenuElementNameList();
 
-        softAssert.assertEquals(headerMenuElementNames, Arrays
-            .asList("HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"));
+        softAssert.assertEquals(actualHeaderMenuElementNames, getExpectedHeaderItemNameList());
 
         // 6. Assert that there are 4 images on the Index Page, and they are displayed
-        boolean isImagesDisplayed = new HomePage(webDriver)
-            .isImagesDisplayed();
+        List<WebElement> actualVisibleImages = homePage.getVisibleImagesDisplayed();
 
-        softAssert.assertTrue(isImagesDisplayed);
+        softAssert.assertEquals(actualVisibleImages.size(), 4);
 
         // 7. Assert that there are 4 texts on the Index Page under icons, and they have proper text
-        List<String> imagesTextList = new HomePage(webDriver)
-            .getImagesTextList();
+        List<String> imagesTextList = homePage.getImagesTextList();
 
-        softAssert.assertEquals(imagesTextList, Arrays
-            .asList("To include good practices\nand ideas from successful\nEPAM project",
-                "To be flexible and\ncustomizable",
-                "To be multiplatform",
-                "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"));
+        softAssert.assertEquals(imagesTextList, getExpectedImageTextList());
 
         // 8. Assert that there is the iframe with “Frame Button” exist
-        boolean isIframeDisplayed = new HomePage(webDriver)
-            .isIframeDisplayed();
+        List<WebElement> iframeWithButtonList = homePage.getVisibleIframeWithButton();
 
-        softAssert.assertTrue(isIframeDisplayed);
+        softAssert.assertEquals(iframeWithButtonList.size(), 1);
 
         // 9. Switch to the iframe and check that there is “Frame Button” in the iframe
-        boolean isIframeButtonDisplayed = new HomePage(webDriver)
-            .switchToIframe()
-            .isIframeButtonDisplayed();
+        List<WebElement> iframeButtonList = homePage
+            .switchToIframeWithButton()
+            .getVisibleIframeButton();
 
-        softAssert.assertTrue(isIframeButtonDisplayed);
+        softAssert.assertEquals(iframeButtonList.size(), 1);
 
         // 10. Switch to original window back
-        String actualTitle = new HomePage(webDriver)
-            .switchToHomePage()
-            .getTitle();
+        String actualTitle = homePage.switchToHomePage().getTitle();
 
-        softAssert.assertEquals(actualTitle, "Home Page");
+        softAssert.assertEquals(actualTitle, getExpectedHomePageTitle());
 
         // 11. Assert that there are 5 items in the Left Section are displayed, and they have proper text
-        boolean isLeftMenuElementDisplayed = new HomePage(webDriver)
-            .isLeftMenuElementDisplayed();
+        List<WebElement> leftVisibleMenuElement = homePage.getLeftVisibleMenuElement();
 
-        softAssert.assertTrue(isLeftMenuElementDisplayed);
+        softAssert.assertEquals(leftVisibleMenuElement.size(), 5);
 
-        List<String> leftMenuElementsTextList = new HomePage(webDriver)
-            .getLeftMenuElementNameList();
+        List<String> leftMenuElementsTextList = homePage.getLeftMenuElementNameList();
 
-        softAssert.assertEquals(leftMenuElementsTextList, Arrays
-            .asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs"));
+        softAssert.assertEquals(leftMenuElementsTextList, getExpectedLeftMenuElementList());
 
         softAssert.assertAll();
-
-        // 12. Close Browser
-        webDriver.quit();
     }
 }

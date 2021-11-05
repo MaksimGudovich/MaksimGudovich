@@ -1,9 +1,8 @@
 package com.epam.tc.hw3.page.component;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElements;
+import static com.epam.tc.hw3.util.ElementListHandler.clickOnElementInList;
+import static com.epam.tc.hw3.util.ElementListHandler.getTextList;
 
-import com.epam.tc.hw3.util.ElementListHandler;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,28 +26,20 @@ public class HeaderMenu extends AbstractComponent {
         super(webDriver);
     }
 
-    public boolean isAllElementsDisplayed() {
-        return ElementListHandler.isAllDisplayed(wait, headerMenuElementsList);
+    public List<WebElement> getVisibleElements() {
+        return headerMenuElementsList;
     }
 
     public List<String> getMenuElementNameList() {
-        return ElementListHandler.getTextList(wait, headerMenuElementsList);
+        return getTextList(headerMenuElementsList);
     }
 
     public void openServiceMenu() {
-        wait.until(visibilityOf(serviceButton)).click();
+        serviceButton.click();
     }
 
     public void clickServiceElementItem(String buttonName) {
         openServiceMenu();
-        wait.until(visibilityOfAllElements(serviceItemList));
-
-        for (WebElement serviceItem : serviceItemList
-        ) {
-            if (serviceItem.getText().equalsIgnoreCase(buttonName)) {
-                serviceItem.click();
-                break;
-            }
-        }
+        clickOnElementInList(serviceItemList, buttonName);
     }
 }

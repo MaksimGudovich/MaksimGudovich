@@ -1,9 +1,9 @@
 package com.epam.tc.hw3;
 
+import static com.epam.tc.hw3.JdiTestData.getTestUserName;
+import static com.epam.tc.hw3.JdiTestData.getTestUserPassword;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.epam.tc.hw3.page.DifferentElementsPage;
-import com.epam.tc.hw3.page.HomePage;
 import org.testng.annotations.Test;
 
 public class DifferentElementsPageTest extends BaseTest {
@@ -12,9 +12,7 @@ public class DifferentElementsPageTest extends BaseTest {
     // 2. Assert Browser title
     @Test
     public void openHomePageTest() {
-        String title = new HomePage(webDriver)
-            .open()
-            .getTitle();
+        String title = homePage.getTitle();
 
         assertThat(title).isEqualTo("Home Page");
     }
@@ -23,9 +21,8 @@ public class DifferentElementsPageTest extends BaseTest {
     // 4. Assert User name in the right-top side of screen that user is loggined
     @Test
     public void userLoginTest() {
-        String actualUserName = new HomePage(webDriver)
-            .open()
-            .loginUser(userName, userPassword)
+        String actualUserName = homePage
+            .loginUser(getTestUserName(), getTestUserPassword())
             .getUserName();
 
         assertThat(actualUserName).isEqualTo("ROMAN IOVLEV");
@@ -34,9 +31,9 @@ public class DifferentElementsPageTest extends BaseTest {
     // 5. Open through the header menu Service -> Different Elements Page
     @Test
     public void openDifferentElementPageTest() {
-        new HomePage(webDriver).open().loginUser(userName, userPassword);
+        homePage.loginUser(getTestUserName(), getTestUserPassword());
 
-        String actualTitle = new DifferentElementsPage(webDriver)
+        String actualTitle = homePage
             .getDifferentElementPage()
             .getTitle();
 
@@ -48,9 +45,9 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWaterCheckboxTest() {
-        new HomePage(webDriver).open().loginUser(userName, userPassword);
+        homePage.loginUser(getTestUserName(), getTestUserPassword());
 
-        String waterChangeLog = new DifferentElementsPage(webDriver)
+        String waterChangeLog = homePage
             .getDifferentElementPage()
             .clickCheckbox("Water")
             .getLastLog();
@@ -63,9 +60,9 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWindCheckboxTest() {
-        new HomePage(webDriver).open().loginUser(userName, userPassword);
+        homePage.loginUser(getTestUserName(), getTestUserPassword());
 
-        String windChangeLog = new DifferentElementsPage(webDriver)
+        String windChangeLog = homePage
             .getDifferentElementPage()
             .clickCheckbox("Wind")
             .getLastLog();
@@ -77,9 +74,9 @@ public class DifferentElementsPageTest extends BaseTest {
     // 9. Assert that: for radio button there is a log row and value is corresponded to the status of radio button
     @Test
     public void selectSelenRadioTest() {
-        new HomePage(webDriver).open().loginUser(userName, userPassword);
+        homePage.loginUser(getTestUserName(), getTestUserPassword());
 
-        String selenChangeLog = new DifferentElementsPage(webDriver)
+        String selenChangeLog = homePage
             .getDifferentElementPage()
             .clickRadio("Selen")
             .getLastLog();
@@ -89,11 +86,11 @@ public class DifferentElementsPageTest extends BaseTest {
 
     // 8. Select dropdown (Yellow)
     // 9. Assert that: for dropdown there is a log row and value is corresponded to the selected value
-    @Test(priority = 3)
+    @Test
     public void selectYellowDropdownTest() {
-        new HomePage(webDriver).open().loginUser(userName, userPassword);
+        homePage.loginUser(getTestUserName(), getTestUserPassword());
 
-        String colorChangeLog = new DifferentElementsPage(webDriver)
+        String colorChangeLog = homePage
             .getDifferentElementPage()
             .clickDropdown("Yellow")
             .getLastLog();

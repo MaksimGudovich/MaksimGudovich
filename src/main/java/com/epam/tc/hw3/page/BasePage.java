@@ -6,29 +6,23 @@ import com.epam.tc.hw3.page.component.LeftMenu;
 import com.epam.tc.hw3.page.component.LoginWindow;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class AbstractPage<T> extends AbstractComponent {
-
-    protected static final String BASE_URL = "https://jdi-testing.github.io";
+public class BasePage extends AbstractComponent {
 
     protected LoginWindow loginWindow;
     protected HeaderMenu headerMenu;
     protected LeftMenu leftMenu;
     protected String handle;
 
-    protected AbstractPage(WebDriver webDriver) {
+    protected BasePage(WebDriver webDriver) {
         super(webDriver);
         loginWindow = new LoginWindow(webDriver);
         headerMenu = new HeaderMenu(webDriver);
         leftMenu = new LeftMenu(webDriver);
         handle = webDriver.getWindowHandle();
         PageFactory.initElements(webDriver, this);
-    }
-
-    public T open() {
-        webDriver.get(BASE_URL);
-        return (T) this;
     }
 
     public String getTitle() {
@@ -39,24 +33,19 @@ public class AbstractPage<T> extends AbstractComponent {
         return loginWindow.getUserName();
     }
 
-    public boolean isHeaderElementsDisplayed() {
-        return headerMenu.isAllElementsDisplayed();
+    public List<WebElement> getVisibleHeaderElements() {
+        return headerMenu.getVisibleElements();
     }
 
     public List<String> getHeaderMenuElementNameList() {
         return headerMenu.getMenuElementNameList();
     }
 
-    public boolean isLeftMenuElementDisplayed() {
-        return leftMenu.isMenuElementDisplayed();
+    public List<WebElement> getLeftVisibleMenuElement() {
+        return leftMenu.getLeftVisibleMenuElement();
     }
 
     public List<String> getLeftMenuElementNameList() {
         return leftMenu.getMenuElementNameList();
-    }
-
-    public T getDifferentElementPage() {
-        headerMenu.clickServiceElementItem("Different elements");
-        return (T) this;
     }
 }

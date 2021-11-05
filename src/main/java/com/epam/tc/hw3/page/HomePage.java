@@ -1,26 +1,25 @@
 package com.epam.tc.hw3.page;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static com.epam.tc.hw3.util.ElementListHandler.getTextList;
 
-import com.epam.tc.hw3.util.ElementListHandler;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends AbstractPage<HomePage> {
+public class HomePage extends BasePage {
 
     @FindBy(className = "icons-benefit")
-    List<WebElement> imagesList;
+    private List<WebElement> imagesList;
 
     @FindBy(className = "benefit-txt")
-    List<WebElement> imagesTextList;
+    private List<WebElement> imagesTextList;
 
     @FindBy(id = "frame")
-    WebElement iframe;
+    private List<WebElement> iframe;
 
     @FindBy(id = "frame-button")
-    WebElement iframeButton;
+    private List<WebElement> iframeButton;
 
     public HomePage(WebDriver webDriver) {
         super(webDriver);
@@ -29,33 +28,42 @@ public class HomePage extends AbstractPage<HomePage> {
     public HomePage loginUser(String userName, String userPassword) {
         loginWindow.openLoginWindow();
         loginWindow.login(userName, userPassword);
-        handle = webDriver.getWindowHandle();
         return this;
     }
 
-    public boolean isImagesDisplayed() {
-        return ElementListHandler.isAllDisplayed(wait, imagesList);
+    public HomePage open(String url) {
+        webDriver.get(url);
+        return this;
+    }
+
+    public List<WebElement> getVisibleImagesDisplayed() {
+        return  imagesList;
     }
 
     public List<String> getImagesTextList() {
-        return ElementListHandler.getTextList(wait, imagesTextList);
+        return getTextList(imagesTextList);
     }
 
-    public boolean isIframeDisplayed() {
-        return wait.until(visibilityOf(iframe)).isDisplayed();
+    public List<WebElement> getVisibleIframeWithButton() {
+        return iframe;
     }
 
-    public HomePage switchToIframe() {
-        webDriver = webDriver.switchTo().frame(iframe);
+    public HomePage switchToIframeWithButton() {
+        webDriver.switchTo().frame(iframe.get(0));
         return this;
     }
 
     public HomePage switchToHomePage() {
-        webDriver = webDriver.switchTo().window(handle);
+        webDriver.switchTo().window(handle);
         return this;
     }
 
-    public boolean isIframeButtonDisplayed() {
-        return wait.until(visibilityOf(iframeButton)).isDisplayed();
+    public List<WebElement> getVisibleIframeButton() {
+        return iframeButton;
+    }
+
+    public DifferentElementsPage getDifferentElementPage() {
+        headerMenu.clickServiceElementItem("Different elements");
+        return new DifferentElementsPage(webDriver);
     }
 }

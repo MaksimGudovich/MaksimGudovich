@@ -1,7 +1,5 @@
 package com.epam.tc.hw3.page.component;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,11 +26,11 @@ public class LoginWindow extends AbstractComponent {
     }
 
     public void openLoginWindow() {
-        wait.until(visibilityOf(loginCaret)).click();
+        loginCaret.click();
     }
 
     public void login(String userName, String userPassword) {
-        wait.until(visibilityOf(loginField)).sendKeys(userName);
+        loginField.sendKeys(userName);
         passwordField.sendKeys(userPassword);
         loginEnterButton.click();
     }
