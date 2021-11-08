@@ -5,14 +5,17 @@ import static com.epam.tc.hw4.JdiTestData.HOME_PAGE_TITLE;
 import static com.epam.tc.hw4.JdiTestData.IMAGE_TEXT_LIST;
 import static com.epam.tc.hw4.JdiTestData.LEFT_MENU_ELEMENT_LIST;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
+@Feature("Failed homepage")
+@Story("Check allure working")
 public class FailHomepageTest extends BaseTest {
 
     @Test
     public void jdiHomePageTest() {
-
-        actionStep.openHomePage();
 
         //2. Assert Browser title
         assertHomepageStep.checkPageTitle(HOME_PAGE_TITLE);
@@ -46,6 +49,7 @@ public class FailHomepageTest extends BaseTest {
         assertHomepageStep.checkPageTitle(HOME_PAGE_TITLE);
 
         // 11. Assert that there are 5 items in the Left Section are displayed, and they have proper text
+        // FAIL TEST (Expected number should be 5)
         assertHomepageStep.checkLeftElementDisplayed(6);
         assertHomepageStep.checkLeftMenuElementsNames(LEFT_MENU_ELEMENT_LIST);
     }

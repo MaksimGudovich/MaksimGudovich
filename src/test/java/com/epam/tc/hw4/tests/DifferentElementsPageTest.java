@@ -14,10 +14,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 2. Assert Browser title
     @Test
     public void openHomePageTest() {
-        // Если убрать отовсюду этот общий шаг в @BeforeMethod, то перестает работать создание скриншотов при падении
-        // тестов, при запуске нескольких тестовых классов в сьюте.
-        // Так и не смог решить в чем проблема.
-        actionStep.openHomePage();
 
         assertHomepageStep.checkPageTitle(HOME_PAGE_TITLE);
     }
@@ -26,7 +22,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 4. Assert User name in the right-top side of screen that user is loggined
     @Test
     public void userLoginTest() {
-        actionStep.openHomePage();
         actionStep.login();
         assertHomepageStep.checkUserIsLoggined("ROMAN IOVLEV");
     }
@@ -34,7 +29,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 5. Open through the header menu Service -> Different Elements Page
     @Test
     public void openDifferentElementPageTest() {
-        actionStep.openHomePage();
         actionStep.login();
         actionStep.openDifferentElementPage();
         assertDifferentElementsPageStep.checkPageTitle("Different Elements");
@@ -45,7 +39,6 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWaterCheckboxTest() {
-        actionStep.openHomePage();
         actionStep.login();
         actionStep.openDifferentElementPage();
         actionStep.selectCheckbox("Water");
@@ -57,7 +50,6 @@ public class DifferentElementsPageTest extends BaseTest {
     //    to the status of checkbox
     @Test
     public void selectWindCheckboxTest() {
-        actionStep.openHomePage();
         actionStep.login();
         actionStep.openDifferentElementPage();
         actionStep.selectCheckbox("Wind");
@@ -68,7 +60,6 @@ public class DifferentElementsPageTest extends BaseTest {
     // 9. Assert that: for radio button there is a log row and value is corresponded to the status of radio button
     @Test
     public void selectSelenRadioTest() {
-        actionStep.openHomePage();
         actionStep.login();
         actionStep.openDifferentElementPage();
         actionStep.selectRadio("Selen");
@@ -79,7 +70,7 @@ public class DifferentElementsPageTest extends BaseTest {
     // 9. Assert that: for dropdown there is a log row and value is corresponded to the selected value
     @Test
     public void selectYellowDropdownTest() {
-        actionStep.openHomePage();
+
         actionStep.login();
         actionStep.openDifferentElementPage();
         actionStep.selectDropdown("Yellow");

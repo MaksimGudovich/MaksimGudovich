@@ -30,12 +30,13 @@ public class BaseTest {
         webDriver = new ChromeDriver();
         context.setAttribute("driver", webDriver);
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
         actionStep = new ActionStep(webDriver);
         assertHomepageStep = new AssertHomepageStep(webDriver);
         assertDifferentElementsPageStep = new AssertDifferentElementsPageStep(webDriver);
 
+        actionStep.openHomePage();
     }
 
     @AfterMethod

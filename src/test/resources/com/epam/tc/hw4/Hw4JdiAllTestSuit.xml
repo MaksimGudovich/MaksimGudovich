@@ -5,9 +5,9 @@
   </listeners>
   <test name="JDI Tests">
     <classes>
-<!--      <class name="com.epam.tc.hw4.tests.FailHomepageTest"/>-->
+      <class name="com.epam.tc.hw4.tests.FailHomepageTest"/>
       <class name="com.epam.tc.hw4.tests.HomePageTest"/>
-<!--      <class name="com.epam.tc.hw4.tests.DifferentElementsPageTest"/>-->
+      <class name="com.epam.tc.hw4.tests.DifferentElementsPageTest"/>
     </classes>
   </test>
 

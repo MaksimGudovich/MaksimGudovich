@@ -25,13 +25,13 @@ public class AssertHomepageStep extends AssertBaseStep {
         assertThat(actualImagesTextList).isEqualTo(expectedList);
     }
 
-    @Step("Checking \"iFrame with button\" on homepage")
+    @Step("Checking iFrame with button on homepage")
     public void checkIframeWithButton(int expectedNumber) {
         List<WebElement> actualIframeWithButtonList = homePage.getIframeWithButtonList();
         assertThat(actualIframeWithButtonList.size()).isEqualTo(expectedNumber);
     }
 
-    @Step("Checking button in \"iFrame with button\" on homepage")
+    @Step("Checking button in iFrame with button on homepage")
     public void checkButtonInIframe(int expectedNumber) {
         List<WebElement> actualIframeButtonList = homePage.getIframeButtonList();
         assertThat(actualIframeButtonList.size()).isEqualTo(expectedNumber);

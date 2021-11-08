@@ -15,7 +15,6 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void jdiHomePageTest() {
-        actionStep.openHomePage();
 
         //2. Assert Browser title
         assertHomepageStep.checkPageTitle(HOME_PAGE_TITLE);

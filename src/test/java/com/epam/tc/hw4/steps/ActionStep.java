@@ -18,7 +18,7 @@ public class ActionStep extends AbstractStep {
         homePage.open(JDI_URL);
     }
 
-    @Step("Open \"Different elements\" page from homepage")
+    @Step("Open 'Different elements' page from homepage")
     public void openDifferentElementPage() {
         homePage.getDifferentElementPage();
     }
@@ -28,7 +28,7 @@ public class ActionStep extends AbstractStep {
         homePage.loginUser(USER_NAME, USER_PASSWORD);
     }
 
-    @Step("Switch to \"iFrame with button\" on homepage")
+    @Step("Switch to 'iFrame with button' on homepage")
     public void switchToIframeWithButton() {
         homePage.switchToIframeWithButton();
     }
@@ -52,5 +52,4 @@ public class ActionStep extends AbstractStep {
     public void selectDropdown(String dropdown) {
         differentElementsPage.clickDropdown(dropdown);
     }
-
 }
