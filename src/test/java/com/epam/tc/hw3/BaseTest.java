@@ -1,6 +1,6 @@
 package com.epam.tc.hw3;
 
-import static com.epam.tc.hw3.JdiTestData.getTestJdiURL;
+import static com.epam.tc.hw3.FileUtils.JDI_URL;
 
 import com.epam.tc.hw3.page.DifferentElementsPage;
 import com.epam.tc.hw3.page.HomePage;
@@ -21,7 +21,6 @@ public class BaseTest {
     @BeforeClass
     public void setupSuit() {
         WebDriverManager.chromedriver().setup();
-        new JdiTestData();
     }
 
     @BeforeMethod
@@ -31,7 +30,7 @@ public class BaseTest {
         webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));
         homePage = new HomePage(webDriver);
         differentElementsPage = new DifferentElementsPage(webDriver);
-        homePage.open(getTestJdiURL());
+        homePage.open(JDI_URL);
     }
 
     @AfterMethod
