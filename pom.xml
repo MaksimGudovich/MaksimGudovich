@@ -95,7 +95,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc${suite.xml.name}</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc/${suite.xml.name}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -109,30 +109,31 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.name>/hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-multiply-divide-test-suit</id>
             <properties>
-                <suite.xml.name>/hw1/CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-all-test-suit</id>
             <properties>
-                <suite.xml.name>/hw1/CalculatorAllTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>CalculatorAllTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
-            <id>homework2-all-tests-suit</id>
+            <id>homework-03-all-tests-suit</id>
             <properties>
-                <suite.xml.name>/hw2/JDIAllTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw3/JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
+
     </profiles>
 
 </project>
