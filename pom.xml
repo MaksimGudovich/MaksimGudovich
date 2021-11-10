@@ -15,23 +15,29 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <checkstyle.version>8.42</checkstyle.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+        <selenium-java.version>4.0.0</selenium-java.version>
+        <testng.version>7.4.0</testng.version>
+        <allure.version>2.16.0</allure.version>
+        <aspectj.version>1.9.7</aspectj.version>
+
+        <assertj-core.version>3.21.0</assertj-core.version>
+        <webdrivermanager.version>5.0.3</webdrivermanager.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.4.0</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.21.0</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>calculator</groupId>
@@ -44,13 +50,19 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.0.0</version>
+            <version>${selenium-java.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.0.3</version>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
         </dependency>
 
     </dependencies>
@@ -94,13 +106,43 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc/${suite.xml.name}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <profiles>
         <profile>
@@ -109,21 +151,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.name>CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-multiply-divide-test-suit</id>
             <properties>
-                <suite.xml.name>CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-all-test-suit</id>
             <properties>
-                <suite.xml.name>CalculatorAllTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw1/CalculatorAllTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
@@ -131,6 +173,13 @@
             <id>homework-03-all-tests-suit</id>
             <properties>
                 <suite.xml.name>/hw3/JdiAllTestSuit.xml</suite.xml.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homework-04-all-tests-suit</id>
+            <properties>
+                <suite.xml.name>/hw4/Hw4JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
