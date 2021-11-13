@@ -22,6 +22,7 @@
 
         <assertj-core.version>3.21.0</assertj-core.version>
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
+        <cucumber-java.version>7.0.0</cucumber-java.version>
     </properties>
 
     <dependencies>
@@ -63,6 +64,18 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber-java.version}</version>
         </dependency>
 
     </dependencies>
@@ -180,6 +193,13 @@
             <id>homework-04-all-tests-suit</id>
             <properties>
                 <suite.xml.name>/hw4/Hw4JdiAllTestSuit.xml</suite.xml.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homework-05-all-tests-suit</id>
+            <properties>
+                <suite.xml.name>/hw5/Hw5JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
