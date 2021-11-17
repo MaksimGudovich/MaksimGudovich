@@ -13,7 +13,7 @@ public final class TestContext {
     }
 
     public <T> T getObject(String key) {
-        return  (T) context.get(key);
+        return (T) context.get(key);
     }
 
     public void addObject(String key, Object object) {

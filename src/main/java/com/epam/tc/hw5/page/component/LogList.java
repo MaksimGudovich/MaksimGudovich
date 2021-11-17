@@ -6,11 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
-
 public class LogList extends AbstractComponent {
     @FindBy(css = "ul.panel-body-list.logs li")
-    List<WebElement> logList;
+    private List<WebElement> logList;
 
     public LogList(WebDriver webDriver) {
         super(webDriver);

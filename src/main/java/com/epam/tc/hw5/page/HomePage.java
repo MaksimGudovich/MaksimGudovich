@@ -37,7 +37,7 @@ public class HomePage extends BasePage {
     }
 
     public List<WebElement> getImagesList() {
-        return  imagesList;
+        return imagesList;
     }
 
     public List<String> getImagesTextList() {
@@ -61,5 +61,4 @@ public class HomePage extends BasePage {
     public List<WebElement> getIframeButtonList() {
         return iframeButton;
     }
-
 }

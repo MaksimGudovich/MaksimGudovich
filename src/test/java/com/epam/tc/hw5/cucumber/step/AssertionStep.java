@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebElement;
+import org.testng.asserts.SoftAssert;
 
 public class AssertionStep extends AbstractStep {
 
     @Then("1 log row has {string} text in Log section")
     public void checkLogInDifferentElementPageLogList(String log) {
         List<String> result = logList.getLogList()
-                                                   .stream()
-                                                   .filter(string -> string.contains(log))
-                                                   .collect(Collectors.toList());
+                                     .stream()
+                                     .filter(string -> string.contains(log))
+                                     .collect(Collectors.toList());
         assertThat(result.size()).isEqualTo(1);
     }
 
@@ -48,29 +49,21 @@ public class AssertionStep extends AbstractStep {
 
     @Then("^User table should contain following values:$")
     public void checkUserTableData(DataTable tableData) {
+        SoftAssert softAssert = new SoftAssert();
         List<Map<String, String>> expectedTableData = tableData.asMaps(String.class, String.class);
-        List<WebElement> numberList = userTablePage.getNumberList();
-        List<WebElement> userList = userTablePage.getUserList();
-        List<WebElement> descriptionList = userTablePage.getDescriptionList();
-        boolean isTablesEquals = true;
-        int counter = 0;
-        try {
-            for (Map<String, String> expectedRow : expectedTableData) {
-                System.out.println(expectedRow);
-                if (!expectedRow.get("Number").equals(numberList.get(counter).getText())
-                    || !expectedRow.get("User").equals(userList.get(counter).getText())
-                    || !expectedRow.get("Description").equals(descriptionList.get(counter).getText()
-                                                                             .replaceAll("\n", " "))) {
-                    isTablesEquals = false;
-                    break;
-                } else {
-                    counter++;
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-        assertThat(isTablesEquals).isTrue();
+
+        softAssert.assertEquals(userTablePage.getNumberList(), getTableColumnList(expectedTableData, "Number"));
+        softAssert.assertEquals(userTablePage.getUserList(), getTableColumnList(expectedTableData, "User"));
+        softAssert.assertEquals(userTablePage
+            .getDescriptionList(), getTableColumnList(expectedTableData, "Description"));
+
+        softAssert.assertAll();
+    }
+
+    private List<String> getTableColumnList(List<Map<String, String>> table, String key) {
+        List<String> tableColumn = new ArrayList<>();
+        table.forEach(element -> tableColumn.add(element.get(key)));
+        return tableColumn;
     }
 
     @Then("^droplist should contain value in column Type for user Roman$")
