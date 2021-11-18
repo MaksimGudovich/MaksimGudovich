@@ -23,6 +23,7 @@ public final class WebDriverProvider {
 
     public static void closeDriver() {
         webDriver.quit();
+        webDriver = null;
     }
 
 }
