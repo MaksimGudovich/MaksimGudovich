@@ -202,7 +202,14 @@
                 <suite.xml.name>/hw5/Hw5JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
-
+      
+        <profile>
+            <id>homework-06-all-tests-suit</id>
+            <properties>
+                <suite.xml.name>/hw6/Hw6JdiAllTestSuit.xml</suite.xml.name>
+           </properties>
+        </profile>
+              
     </profiles>
 
 </project>
