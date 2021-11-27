@@ -1,9 +1,9 @@
 package com.epam.tc.hw7.test;
 
-import static com.epam.tc.hw7.SiteJdi.headerMenu;
 import static com.epam.tc.hw7.entities.HeaderMenu.MetalsAndColors;
+import static com.epam.tc.hw7.page.HomePage.headerMenu;
 import static com.epam.tc.hw7.page.MetalsAndColorsPage.metalAndColorForm;
-import static com.epam.tc.hw7.step.MetalColorAssertionStep.checkMetalAndColorResult;
+import static com.epam.tc.hw7.step.MetalColorAssertionStep.validateResultsOnMetalAndColorPage;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.tc.hw7.TestInit;
@@ -23,6 +23,6 @@ public class MetalAndColorsPageTest implements TestInit {
     @Test(dataProviderClass = MetalColorDataProvider.class, dataProvider = "Metals & Colors Data Provider From json")
     public void submitMetalsAndColorsFormTest(MetalsAndColorsData metalsAndColorsData) {
         metalAndColorForm.submit(metalsAndColorsData);
-        checkMetalAndColorResult(metalsAndColorsData);
+        validateResultsOnMetalAndColorPage(metalsAndColorsData);
     }
 }
