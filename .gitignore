@@ -3,3 +3,4 @@ target
 .idea
 formatter
 .allure
+.DS_store
