@@ -23,6 +23,11 @@
         <assertj-core.version>3.21.0</assertj-core.version>
         <webdrivermanager.version>5.0.3</webdrivermanager.version>
         <cucumber-java.version>7.0.0</cucumber-java.version>
+
+        <gson.version>2.8.9</gson.version>
+        <hamcrest-core.version>2.2</hamcrest-core.version>
+        <rest-assured.version>4.4.0</rest-assured.version>
+
     </properties>
 
     <dependencies>
@@ -77,6 +82,34 @@
             <artifactId>cucumber-testng</artifactId>
             <version>${cucumber-java.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>${hamcrest-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ainrif.apiator</groupId>
+            <artifactId>jakson-plugin-core-json-renderer</artifactId>
+            <version>0.15.0</version>
+        </dependency>
+
+
+
 
     </dependencies>
 
@@ -160,9 +193,6 @@
     <profiles>
         <profile>
             <id>calculator-sum-subtract-test-suit</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <suite.xml.name>/hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
             </properties>
@@ -208,6 +238,16 @@
             <properties>
                 <suite.xml.name>/hw6/Hw6JdiAllTestSuit.xml</suite.xml.name>
            </properties>
+        </profile>
+
+        <profile>
+            <id>homework-09-api-all-tests-suit</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml.name>/hw9api/Hw9TrelloAllTestSuit.xml</suite.xml.name>
+            </properties>
         </profile>
               
     </profiles>
