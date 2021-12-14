@@ -153,6 +153,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <argLine>
+                        --illegal-access=warn
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
 
@@ -242,11 +243,18 @@
 
         <profile>
             <id>homework-09-api-all-tests-suit</id>
+            <properties>
+                <suite.xml.name>/hw9api/Hw9TrelloAllTestSuit.xml</suite.xml.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homework-09-petstore-api-all-tests-suit</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml.name>/hw9api/Hw9TrelloAllTestSuit.xml</suite.xml.name>
+                <suite.xml.name>/hw9petstore/Hw9PetstoreAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
               
