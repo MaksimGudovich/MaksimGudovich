@@ -15,6 +15,7 @@ public class PetStep {
     @Step("Creation pet")
     public static Pet createPet() {
         Pet pet = new Pet();
+        pet.setId(((int) (Math.random() * 999999)) + "");
         pet.setName(RandomStringUtils.randomAlphabetic(10));
         pet.setStatus(PetStatus.AVAILABLE.value);
 

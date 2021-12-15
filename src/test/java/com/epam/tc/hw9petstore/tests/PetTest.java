@@ -10,10 +10,12 @@ import com.epam.tc.hw9petstore.bean.Pet;
 import com.epam.tc.hw9petstore.constants.PetStatus;
 import com.epam.tc.hw9petstore.core.serviseobject.PetServiceObject;
 import com.epam.tc.hw9petstore.step.PetStep;
-import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import io.restassured.response.Response;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang.RandomStringUtils;
+import org.awaitility.Awaitility;
 import org.testng.annotations.Test;
 
 public class PetTest {
@@ -40,7 +42,10 @@ public class PetTest {
     @Test(description = "Change pet name test")
     public void changeNameTest() {
 
+        Pet testPet = PetStep.createPet();
+
         Pet updatePet = new Pet();
+        updatePet.setId(testPet.getId());
         updatePet.setName(RandomStringUtils.randomAlphabetic(10));
 
         Pet receivedPet = PetServiceObject.getPetInstance(
@@ -57,7 +62,10 @@ public class PetTest {
     @Test(description = "Change pet status test")
     public void changeStatusTest() {
 
+        Pet testPet = PetStep.createPet();
+
         Pet updatedPet = new Pet();
+        updatedPet.setId(testPet.getId());
         updatedPet.setStatus(PetStatus.SOLD.value);
 
         Pet receivedPet = PetServiceObject.getPetInstance(
@@ -71,19 +79,23 @@ public class PetTest {
         assertThat(receivedPet.getStatus()).isEqualTo(PetStatus.SOLD.value);
     }
 
-    // Petstore only returns a random object, not a created one
-    @Test(description = "Change pet status test")
+    @Test(description = "Get pet test")
     public void getPetTest() {
-        Pet createdPet = PetStep.createPet();
+        Pet testPet = PetStep.createPet();
+        //        Waiter.wait(60000);
 
-        PetServiceObject.getPetInstance(
-            requestPetBuilder()
-                .setMethod(Method.GET)
-                .setId(createdPet.getId())
-                .buildRequest()
-                .sendPetIdRequest()
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON));
+        Awaitility.await().atMost(60, TimeUnit.SECONDS).pollInterval(5, TimeUnit.SECONDS)
+                  .untilAsserted(() -> {
+                      final Pet receivedPet = PetServiceObject.getPetInstance(
+                          requestPetBuilder()
+                              .setMethod(Method.GET)
+                              .setId(testPet.getId())
+                              .buildRequest()
+                              .sendPetIdRequest()
+                              .then()
+                              .spec(goodResponseSpecification()));
+
+                      assertThat(receivedPet.getName()).isEqualTo(testPet.getName());
+                  });
     }
 }

@@ -15,6 +15,7 @@ public class OrderStep {
     public static Order createOrder(String petId) {
 
         Order order = new Order();
+        order.setId(((int) (Math.random() * 10)) + "");
         order.setPetId(petId);
         order.setQuantity(((int) (Math.random() * 99)) + "");
         order.setStatus(OrderStatus.PLACED.value);
