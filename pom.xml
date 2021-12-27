@@ -28,6 +28,11 @@
         <hamcrest-core.version>2.2</hamcrest-core.version>
         <rest-assured.version>4.4.0</rest-assured.version>
 
+        <jdi-light-html.version>1.3.17</jdi-light-html.version>
+        <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <jetty.version>9.4.12.RC2</jetty.version>
+        <log.level>DEBUG</log.level>
+
     </properties>
 
     <dependencies>
@@ -114,7 +119,12 @@
             <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
-
+      
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>${jdi-light-html.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -161,9 +171,8 @@
                         --illegal-access=warn
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc/${suite.xml.name}</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/com/epam/tc/${suit.xml.name}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>
@@ -180,6 +189,16 @@
                 <version>2.10.0</version>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <reporting>
@@ -200,52 +219,59 @@
         <profile>
             <id>calculator-sum-subtract-test-suit</id>
             <properties>
-                <suite.xml.name>/hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>hw1/CalculatorSumSubtractTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-multiply-divide-test-suit</id>
             <properties>
-                <suite.xml.name>/hw1/CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>hw1/CalculatorMultiplyDivideTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>calculator-all-test-suit</id>
             <properties>
-                <suite.xml.name>/hw1/CalculatorAllTestsSuit.xml</suite.xml.name>
+                <suite.xml.name>hw1/CalculatorAllTestsSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>homework-03-all-tests-suit</id>
             <properties>
-                <suite.xml.name>/hw3/JdiAllTestSuit.xml</suite.xml.name>
+                <suite.xml.name>hw3/JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>homework-04-all-tests-suit</id>
             <properties>
-                <suite.xml.name>/hw4/Hw4JdiAllTestSuit.xml</suite.xml.name>
+                <suite.xml.name>hw4/Hw4JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
 
         <profile>
             <id>homework-05-all-tests-suit</id>
             <properties>
-                <suite.xml.name>/hw5/Hw5JdiAllTestSuit.xml</suite.xml.name>
+                <suite.xml.name>hw5/Hw5JdiAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
-      
+
         <profile>
             <id>homework-06-all-tests-suit</id>
             <properties>
-                <suite.xml.name>/hw6/Hw6JdiAllTestSuit.xml</suite.xml.name>
+                <suite.xml.name>hw6/Hw6JdiAllTestSuit.xml</suite.xml.name>
            </properties>
         </profile>
 
+        <profile>
+           <id>homework-07-jdi-test-suit</id>
+           <properties>
+               <suit.xml.name>hw7/JdiHwTestSuit.xml</suit.xml.name>
+           </properties>
+        </profile>
+          
         <profile>
             <id>homework-09-api-all-tests-suit</id>
             <properties>
@@ -262,7 +288,7 @@
                 <suite.xml.name>/hw9petstore/Hw9PetstoreAllTestSuit.xml</suite.xml.name>
             </properties>
         </profile>
-              
+ 
     </profiles>
 
 </project>
